@@ -466,6 +466,10 @@ const BillManager = (() => {
         updateScore();
         loadBill();
 
+        const sound_playing = new Audio("../audio/hi-hi-hi-ha.mp3")
+
+        sound_playing.play()
+
         alert(`Purchased +${bonusMulti} multiplier`);
     };
 
@@ -1119,4 +1123,5 @@ function formatMoney(num) {
     return value % 1 === 0
         ? value + units[unitIndex]
         : value.toFixed(2) + units[unitIndex];
+
 }
