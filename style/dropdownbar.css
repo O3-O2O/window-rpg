@@ -79,53 +79,74 @@ body {
     top: 100%;
     left: 0;
     width: 100%;
-    pointer-events: none;
     z-index: 1000;
 }
 
 /* ================= DROPDOWN ================= */
-.size-inside {
-    list-style: none;
-    margin-top: 12px;
-    background: linear-gradient(180deg, #202020, #121212);
-    border-radius: 12px;
-    overflow: hidden;
-    border: 1px solid rgba(0, 255, 255, 0.3);
-
-    opacity: 0;
-    transform: translateY(-10px);
-    transition: all 0.25s ease;
-
-    pointer-events: auto;
+/* Ẩn mặc định */
+/* ================= DROPDOWN WRAP ================= */
+.dropdown-wrap {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    margin-top: 14px; /* tạo khoảng cách với button */
+    z-index: 1000;
 }
 
-/* active */
+/* ================= DROPDOWN PANEL ================= */
+.size-inside {
+    display: none;
+    list-style: none;
+    min-width: 200px;
+
+    background: linear-gradient(180deg, #1b1b1b, #101010);
+    border-radius: 14px;
+    padding: 8px 0;
+
+    border: 1px solid rgba(0,255,255,0.25);
+
+    box-shadow:
+        0 15px 35px rgba(0,0,0,0.7),
+        0 0 20px rgba(0,255,255,0.15);
+
+    backdrop-filter: blur(6px);
+
+    transform: translateY(-10px) scale(0.95);
+    opacity: 0;
+    transition: all 0.25s ease;
+}
+
+/* Khi active */
 .content-in.active .size-inside {
+    display: block;
+    transform: translateY(0) scale(1);
     opacity: 1;
-    transform: translateY(0);
 }
 
 /* ================= DROPDOWN ITEM ================= */
 .size-inside li button {
     width: 100%;
-    padding: 14px 18px;
+    padding: 14px 22px;
     background: transparent;
     border: none;
-    color: #fff;
+    color: #ddd;
     text-align: left;
     cursor: pointer;
-    transition: all 0.2s ease;
+    font-size: 14px;
+    transition: 0.25s;
 }
 
+/* hover effect */
 .size-inside li button:hover {
-    background: rgba(0, 255, 255, 0.15);
+    background: rgba(0,255,255,0.12);
     color: #00ffff;
-    padding-left: 26px;
+    padding-left: 30px;
 }
 
+/* logout riêng biệt */
 .size-inside li:nth-child(4) button:hover {
-    background: rgba(255, 94, 0, 0.15);
-    color: red;
+    background: rgba(255,0,0,0.15);
+    color: #ff4d4d;
 }
 
 /* ================= ACCOUNT LOAD (GIỮ VỊ TRÍ) ================= */
@@ -360,9 +381,83 @@ body {
     }
 }
 
-/* ================= RESPONSIVE ================= */
-@media (max-width: 900px) {
+/* ================= RESPONSIVE TABLET ================= */
+@media (max-width: 1024px) {
+
     .navigator {
-        grid-template-columns: 1fr;
+        width: 90%;
+        gap: 25px;
     }
+
+    .account-load {
+        width: 90%;
+        padding: 30px;
+    }
+
+}
+
+/* ================= RESPONSIVE MOBILE ================= */
+@media (max-width: 768px) {
+
+    .main-section {
+        gap: 60px;
+        padding: 30px 0;
+    }
+
+    /* NAV chuyển thành 1 cột */
+    .navigator {
+        width: 95%;
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .content-in {
+        padding: 16px;
+    }
+
+    .btn-size {
+        height: 55px;
+        font-size: 16px;
+    }
+
+    /* Dropdown full width đẹp hơn */
+    .dropdown-wrap {
+        width: 100%;
+    }
+
+    .size-inside {
+        width: 100%;
+        min-width: unset;
+    }
+
+    /* Account section xếp dọc */
+    .account-load {
+        width: 95%;
+        padding: 25px;
+    }
+
+}
+
+/* ================= SMALL MOBILE ================= */
+@media (max-width: 480px) {
+
+    .btn-size {
+        height: 50px;
+        font-size: 15px;
+    }
+
+    .size-inside li button {
+        padding: 12px 16px;
+        font-size: 13px;
+    }
+
+    .comment-box {
+        padding: 20px;
+    }
+
+    .inputComment {
+        height: 140px;
+        font-size: 14px;
+    }
+
 }

@@ -1,21 +1,67 @@
 document.addEventListener("DOMContentLoaded", function () {
 
     /* ================= CAPTCHA ================= */
-    const captchaText = document.getElementById("catcha-random");
+    // const captchaText = document.getElementById("catcha-random");
     const captchaInput = document.getElementById("catcha-take");
 
-    const chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-    let captcha = "";
+    // const chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    // let captcha = "";
 
-    const generateCaptcha = () => {
-        captcha = "";
-        for (let i = 0; i < 5; i++) {
-            captcha += chars[Math.floor(Math.random() * chars.length)];
+    // const generateCaptcha = () => {
+    //     captcha = "";
+    //     for (let i = 0; i < 5; i++) {
+    //         captcha += chars[Math.floor(Math.random() * chars.length)];
+    //     }
+    //     captchaText.textContent = captcha;
+    // };
+
+    // generateCaptcha();
+
+    let realCaptcha = "";
+
+        function generateCaptcha(){
+
+            const chars = "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz1234567890";
+            realCaptcha = "";
+
+            for(let i=0;i<5;i++){
+                realCaptcha += chars.charAt(Math.floor(Math.random()*chars.length));
+            }
+
+            const canvas = document.getElementById("captchaCanvas");
+            const ctx = canvas.getContext("2d");
+
+            ctx.clearRect(0,0,canvas.width,canvas.height);
+
+            ctx.fillStyle="#fff";
+            ctx.fillRect(0,0,canvas.width,canvas.height);
+
+            ctx.font="26px Arial";
+            ctx.fillStyle="#111";
+
+            for(let i=0;i<realCaptcha.length;i++){
+                ctx.save();
+                ctx.translate(20 + i*20, 28);
+                ctx.rotate((Math.random()-0.5)*0.5);
+                ctx.fillText(realCaptcha[i],0,0);
+                ctx.restore();
+            }
+
+            // noise
+            for(let i=0;i<20;i++){
+                ctx.strokeStyle="rgba(0,0,0,0.3)";
+                ctx.beginPath();
+                ctx.moveTo(Math.random()*130, Math.random()*45);
+                ctx.lineTo(Math.random()*130, Math.random()*45);
+                ctx.stroke();
+            }
         }
-        captchaText.textContent = captcha;
-    };
 
-    generateCaptcha();
+        generateCaptcha();
+
+/* Click canvas để đổi mã */
+        document.getElementById("captchaCanvas").addEventListener("click",generateCaptcha);
+
 
     /* ================= LOGIN ================= */
     const loginForm = document.getElementById("subm");
@@ -30,7 +76,7 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
-        if (captchaInput.value !== captcha) {
+        if (captchaInput.value !== realCaptcha) {
             alert("Wrong captcha");
             generateCaptcha();
             return;

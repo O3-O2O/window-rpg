@@ -106,30 +106,3 @@
     position: relative;
     overflow: hidden;
 }
-
-.close-sign {
-    position: absolute;
-    inset: 0;
-    z-index: 50;
-    pointer-events: all;
-    backdrop-filter: blur(2px);
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    font-size: 42px;
-    font-weight: 800;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-}
-
-.close-sign::after {
-    content: "Unable to purchase";
-    color: #00ffd0;
-
-    text-shadow:
-        0 0 10px #00ffd0,
-        0 0 25px rgba(0,255,208,0.8),
-        0 0 50px rgba(0,255,208,0.6);
-}

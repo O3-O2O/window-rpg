@@ -1,0 +1,12 @@
+#custom-cursor {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 32px;          /* chỉnh size ở đây */
+            height: 32px;
+            background-size: cover;
+            background-position: center;
+            pointer-events: none;  /* không chặn click */
+            transform: translate(-50%, -50%);
+            z-index: 9999;
+}

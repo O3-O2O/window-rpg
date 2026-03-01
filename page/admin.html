@@ -25,9 +25,9 @@
             <div class="row p-4">
                 <div class="shadow-md p-4">
                     <h5>Thêm sản phẩm</h5>
-                    <form action="" id="">
+                    <form action="" id="product-form">
                         
-                        <div id="product-form">
+                        <div>
 
                             <div class="form-group mt-2">
                                 <label for="name">Ảnh</label>
@@ -39,32 +39,6 @@
                             </div>
 
                         </div>
-
-                        <!-- <div>
-
-                            <div class="form-group">
-                                <label for="name">Mua hàng</label>
-                                <input type="file" class="form-control" id="product_profile" name="product_profile">
-                                <div class="buy-group">
-
-                                    <span id="product_name" class="product_name">Tên sản phẩm:</span>
-                                    <span id="input_product" class="input_product"><input type="text"></span>
-
-                                </div>
-
-                                <div class="buy-group">
-
-                                    <span id="product_price" class="product_price">Giá bán:</span>
-                                    <span id="input_price" class="input_price"><input type="text"></span>
-                                    
-                                </div>
-                            </div>
-                            <div class="form-group mt-2">
-                                <button type="submit" class="btn btn-primary px-4 py-2">Lưu</button>
-                                <button type="reset" class="btn btn-grey p-2">Đặt lại</button>
-                            </div>
-
-                        </div> -->
                     </form>
                 </div>
                 <div class="">
@@ -87,6 +61,47 @@
                     </div>
                 </div>
             </div>
+
+            <div class="row p-4">
+                <div class="shadow-md p-4">
+                    <h5>Thêm sản phẩm</h5>
+                    <form action="" id="profile-form">
+                        
+                        <div>
+
+                            <div class="form-group mt-2">
+                                <label for="name">Hàng</label>
+                                <input type="text" id="profile-product" class="profile-product" placeholder="product...">
+                                <input type="file" class="form-control" id="profile_image" name="profile_image">
+                            </div>
+                            <div class="form-group mt-2">
+                                <button onclick="takeUp()" type="button" class="btn btn-primary">Lưu</button>
+                                <button type="reset" class="btn btn-grey">Đặt lại</button>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+                <div class="">
+                    <div class="product-table p-4 shadow-md">
+                        <h5>Danh sách mua hàng</h5>
+                        <table class="table">
+                            <thead>
+                                <tr class="text-center">
+                                    
+                                    <th scope="col">Giỏ hàng</th>
+                                    
+                                </tr>
+                            </thead>
+                            <tbody id="profile-list">
+                                <tr>
+                                    <!-- Hiển thị danh sách sản phẩm -->
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
 
     </div>
@@ -100,5 +115,12 @@
 
     <script src="../script/firebase.js"></script>
     <script src="../script/admin.js"></script>
+    <script src="../script/product_profile_saving.js"></script>
+
+    <script>
+
+
+
+    </script>
 </body>
 </html>

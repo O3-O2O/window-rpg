@@ -4,33 +4,33 @@ let autoCloseTimer = null;
 let isHoveringDropdown = false;
 
 function dropDown(btn) {
-    if (!btn || btn.tagName !== "BUTTON") return;
 
-    let current = btn;
-    while (current && !current.classList.contains("content-in")) {
-        current = current.parentElement;
-    }
-    if (!current) return;
+    const container = btn.closest(".content-in");
+    if (!container) return;
 
-    const dropdown = current.querySelector(".size-inside");
+    const dropdown = container.querySelector(".size-inside");
     if (!dropdown) return;
 
     // đóng dropdown khác
     document.querySelectorAll(".content-in.active").forEach(el => {
-        if (el !== current) el.classList.remove("active");
+        if (el !== container) {
+            el.classList.remove("active");
+        }
     });
 
-    const isOpening = !current.classList.contains("active");
-    current.classList.toggle("active");
+    const isOpening = !container.classList.contains("active");
+
+    container.classList.toggle("active");
 
     if (isOpening) {
-        setupAutoClose(current, dropdown);
+        setupAutoClose(container, dropdown);
     } else {
         clearTimeout(autoCloseTimer);
     }
 }
 
 function setupAutoClose(container, dropdown) {
+
     clearTimeout(autoCloseTimer);
     isHoveringDropdown = false;
 
@@ -40,7 +40,6 @@ function setupAutoClose(container, dropdown) {
         }
     }, 1500);
 
-    // đảm bảo không gắn trùng
     dropdown.onmouseenter = () => {
         isHoveringDropdown = true;
         clearTimeout(autoCloseTimer);
@@ -53,6 +52,15 @@ function setupAutoClose(container, dropdown) {
         }, 1500);
     };
 }
+
+document.addEventListener("click", function (e) {
+
+    if (!e.target.closest(".content-in")) {
+        document.querySelectorAll(".content-in.active")
+            .forEach(el => el.classList.remove("active"));
+    }
+
+});
 
 window.gamePlay = () => {
 

@@ -1,0 +1,370 @@
+/* ===== RESET ===== */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Tahoma, Verdana, sans-serif;
+}
+
+/* ===== DESKTOP ===== */
+.window-main{
+    height: 100vh;
+    width: 100vw;
+    background: url("../Picture/xp_window_bg.jpg") no-repeat center;
+    background-size: cover;
+    display: grid;
+    grid-template-rows: 27fr 2fr;
+}
+
+/* ===== ICON AREA ===== */
+.content-choosing{
+    display: flex;
+    height: 100%;
+    width: 100%;
+    flex-wrap: wrap;
+    padding: 1%;
+}
+
+.join-game{
+    height: 12%;
+    width: 6%;
+
+    background: transparent;
+    border: none;
+    cursor: pointer;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    gap: 6px;
+    padding: 6px;
+    border-radius: 4px;
+}
+
+.join-game:hover{
+    background: rgba(49,106,197,0.25);
+    outline: 1px solid rgba(255,255,255,0.5);
+}
+
+.join-game:active{
+    background: rgba(49,106,197,0.45);
+}
+
+/* Icon */
+.join-game>div{
+    height: 50%;
+    width: 50%;
+    background: url("../Picture/ChatGPT Image 22_40_25 10 thg 1, 2026.png") no-repeat center;
+    background-size: contain;
+}
+
+/* Tên game */
+.nameGame{
+    font-size: 13px;
+    color: white;
+    text-align: center;
+    line-height: 1.2;
+    text-shadow: 1px 1px 3px black;
+}
+/* ===== TASKBAR ===== */
+.shutdown-bar{
+    position: relative;
+    display: flex;
+    align-items: center;
+
+    background: linear-gradient(
+        to top,
+        #245edb 0%,
+        #3a7bf2 40%,
+        #4f8df7 60%,
+        #2b6de0 100%
+    );
+
+    border-top: 1px solid #ffffffaa;
+    box-shadow: inset 0 1px 2px rgba(255,255,255,0.6);
+}
+
+/* ===== START BUTTON ===== */
+.shutdown-btn{
+    position: relative;
+    height: 100%;
+    width: 8%;
+}
+
+.btn-shut{
+    display: flex;
+    align-items: center;
+
+    height: 100%;
+    width: 100%;
+    padding-left: 10px;
+
+    border: none;
+    cursor: pointer;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+
+    border-radius: 0 18px 18px 0;
+
+    background: linear-gradient(
+        to bottom,
+        #4cd964 0%,
+        #2fa329 45%,
+        #1e7a1e 100%
+    );
+
+    box-shadow:
+        inset 0 2px 3px rgba(255,255,255,0.7),
+        inset 0 -2px 4px rgba(0,0,0,0.4),
+        2px 0 5px rgba(0,0,0,0.3);
+
+    transition: 0.15s;
+}
+
+.btn-shut div{
+    height: 95%;
+    width: 50%;
+    background-size: contain;
+    background: url('../UI/xp_logo-removebg-preview__1_-removebg-preview.png') no-repeat center;
+}
+
+.btn-shut:hover{
+    filter: brightness(1.08);
+}
+
+.btn-shut:active{
+    transform: scale(0.98);
+}
+
+/* ===== START MENU ===== */
+.func-btn{
+    position: absolute;
+    bottom: 100%;
+    left: 0;
+
+    width: 200px;
+
+    background: linear-gradient(
+        to bottom,
+        #ffffff 0%,
+        #e3ecff 40%,
+        #d0defc 100%
+    );
+
+    border: 2px solid #245edb;
+    border-bottom: none;
+    border-radius: 8px 8px 0 0;
+
+    box-shadow: 0 -5px 20px rgba(0,0,0,0.4);
+
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* Menu item */
+.func-btn div{
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 14px;
+    border-bottom: 1px solid #c6d6f7;
+}
+
+.func-btn div:last-child{
+    border-bottom: none;
+}
+
+.func-btn div:hover{
+    background: linear-gradient(
+        to right,
+        #3a7bf2,
+        #6ea3ff
+    );
+    color: white;
+}
+
+/* Show menu */
+.shutdown-btn:hover .func-btn{
+    display: flex;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+/* Tablet */
+@media (max-width: 1024px) {
+
+    .join-game{
+        width: 10%;
+        height: 14%;
+    }
+
+    .nameGame{
+        font-size: 12px;
+    }
+
+    .shutdown-btn{
+        width: 14%;
+    }
+
+    .btn-shut{
+        font-size: 18px;
+    }
+
+    .func-btn{
+        width: 180px;
+    }
+}
+
+
+/* Mobile lớn */
+@media (max-width: 768px) {
+
+    .window-main{
+        grid-template-rows: 20fr 3fr;
+    }
+
+    .join-game{
+        width: 18%;
+        height: 18%;
+    }
+
+    .nameGame{
+        font-size: 11px;
+    }
+
+    .shutdown-btn{
+        width: 25%;
+    }
+
+    .btn-shut{
+        font-size: 16px;
+        padding-left: 6px;
+    }
+
+    .func-btn{
+        width: 160px;
+    }
+}
+
+
+/* Mobile nhỏ */
+@media (max-width: 480px) {
+
+    .content-choosing{
+        justify-content: center;
+    }
+
+    .join-game{
+        width: 30%;
+        height: 22%;
+    }
+
+    .nameGame{
+        font-size: 10px;
+    }
+
+    .shutdown-btn{
+        width: 40%;
+    }
+
+    .btn-shut{
+        font-size: 14px;
+    }
+
+    .func-btn{
+        width: 140px;
+        font-size: 13px;
+    }
+}
+
+/* ===== OPENING APP AREA ===== */
+.openingGame{
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0 10px;
+
+    height: 100%;
+
+    flex: 1;                 /* chiếm phần còn lại của taskbar */
+    overflow-x: auto;        /* nếu nhiều app sẽ scroll ngang */
+}
+
+/* ===== TASKBAR APP BUTTON ===== */
+.taskbar-app{
+    height: 90%;
+    width: 5%;
+
+    padding: 0 8px;
+
+    border: 1px solid rgba(0,0,0,0.3);
+    border-radius: 4px;
+
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: linear-gradient(
+        to bottom,
+        #5fa2ff 0%,
+        #3a7bf2 50%,
+        #245edb 100%
+    );
+
+    box-shadow:
+        inset 0 1px 2px rgba(255,255,255,0.6),
+        inset 0 -1px 2px rgba(0,0,0,0.4);
+
+    transition: 0.1s;
+}
+
+/* Hover giống XP */
+.taskbar-app:hover{
+    filter: brightness(1.1);
+}
+
+/* Active giống XP */
+.taskbar-app:active{
+    background: linear-gradient(
+        to bottom,
+        #3a7bf2,
+        #1e4fb8
+    );
+    transform: scale(0.97);
+}
+
+/* ===== ICON ===== */
+.taskbar-icon{
+    height: 100%;
+    width: 100%;
+
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#openingGame {
+    display: none;
+}
+
+.openingGame:empty {
+    display: none;
+}
+
+.close-app {
+    font-size: 12px;
+    color: white;
+    margin-left: 6px;
+    cursor: pointer;
+}
+
+.close-app:hover {
+    color: red;
+}

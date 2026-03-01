@@ -108,8 +108,22 @@
     gap:10%;
     padding:0;
     backdrop-filter: blur(0px);
+    align-items: center;
 
 }
+
+#captchaCanvas{
+    border-radius:10px;
+    cursor:pointer;
+    user-select:none;
+    height: 100%;
+    width: 40%;
+}
+
+canvas{
+    pointer-events:auto;
+}
+
 
 .input-field-catcha{
 
@@ -119,18 +133,6 @@
     font-size: 25px;
     padding: 5px 15px;
     height:100%;
-
-}
-
-.catcha-container{
-    width:30%;
-    height:133%;
-    background-color: white;
-    font-size: 30px;
-    border-radius: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 
 }
 
@@ -144,7 +146,7 @@
     border:2px gold solid;
     color:white;
     font-weight:bold;
-    font-size: 20px;
+    font-size: 24px;
     transition: 0.3s ease-in-out;
 
 }
@@ -222,6 +224,7 @@
 
 
 
+
 @media only screen and (max-width: 1024px){
 
     .background-changer{
@@ -282,3 +285,4 @@
     }
 
 }
+
