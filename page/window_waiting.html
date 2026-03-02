@@ -18,6 +18,7 @@
             font-family: Tahoma, sans-serif;
             color: white;
             overflow: hidden;
+            cursor: progress;
         }
 
         .boot-screen {
@@ -100,6 +101,7 @@
             font-weight: bold;
             color: #aaa;
         }
+        
 
         /* Responsive mobile */
         @media (max-width: 600px) {
@@ -146,6 +148,11 @@
             window.location.href = "window.html"
 
         },5000)
+
+        const startup = new Audio("../audio/startup_xp.mp3")
+        startup.play()
+
+
 
     </script>
 </body>
