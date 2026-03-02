@@ -6,6 +6,7 @@
     font-family: Tahoma, Verdana, sans-serif;
 }
 
+
 /* ===== DESKTOP ===== */
 .window-main{
     height: 100vh;
@@ -15,7 +16,6 @@
     display: grid;
     grid-template-rows: 27fr 2fr;
 }
-
 /* ===== ICON AREA ===== */
 .content-choosing{
     display: flex;

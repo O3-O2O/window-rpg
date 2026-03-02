@@ -30,7 +30,11 @@ window.addEventListener("DOMContentLoaded", () => {
                 window.close();
                 document.body.innerHTML = "";
             } else {
-                window.location.href = "window.html";
+                setTimeout(() => {
+
+                    window.location.href = "window_waiting.html";
+
+                },1000)
             }
 
         }, 1500);

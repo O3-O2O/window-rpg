@@ -1123,5 +1123,4 @@ function formatMoney(num) {
     return value % 1 === 0
         ? value + units[unitIndex]
         : value.toFixed(2) + units[unitIndex];
-
 }
