@@ -14,7 +14,7 @@
 
     </style>
     
-    <div class="window-main">
+    <div id="dropZone" class="window-main">
 
         <div class="content-choosing">
 
@@ -23,6 +23,14 @@
                 <div></div>
 
                 <span class="nameGame">Clicking Rpg</span>
+
+            </button>
+
+            <button onclick="windowComputer()" class="join-game">
+
+                <div class="myComputer"></div>
+
+                <span class="nameGame">My computer</span>
 
             </button>
 
@@ -50,6 +58,49 @@
             <div id="openingGame" class="openingGame">
 
 
+
+            </div>
+
+        </div>
+
+        <div id="comZone" class="myComputerFunction minus" draggable="true">
+
+            <div class="close-exit">
+
+                <span>My computer</span>
+
+                <div class="btn-close-exit">
+
+                    <button onclick="closingPC()">-</button>
+                    <button onclick="deletePC()">✕</button>
+
+                </div>
+
+            </div>
+
+            <div class="insInf">
+
+                <div class="bgChanging">
+
+                    <div class="bgFont">
+
+                        <span>Background</span>
+
+                    </div>
+
+                    <div class="bgBtn">
+
+                        <button onclick="bgChangeGradient('linear-gradient(to bottom, #4facfe, #00f2fe)')" style="background: linear-gradient(to bottom, #4facfe, #00f2fe);"></button>
+                        <button onclick="bgChangeGradient('linear-gradient(to right, #ff512f, #dd2476)')" style="background: linear-gradient(to right, #ff512f, #dd2476);"></button>
+                        <button onclick="bgChangeGradient('linear-gradient(to bottom, #0f2027, #203a43, #2c5364)')" style="background: linear-gradient(to bottom, #0f2027, #203a43, #2c5364);"></button>
+                        <button onclick="bgChangeGradient('linear-gradient(to right, #11998e, #38ef7d)')" style="background: linear-gradient(to right, #11998e, #38ef7d);"></button>
+                        <button onclick="bgChangeGradient('linear-gradient(to right, #8e2de2, #4a00e0)')" style="background: linear-gradient(to right, #8e2de2, #4a00e0);"></button>
+                        <button onclick="bgChangeGradient('radial-gradient(circle, #ffecd2, #fcb69f)')" style="background: radial-gradient(circle, #ffecd2, #fcb69f);"></button>
+                        <button onclick="resetBg();">⟲</button>
+
+                    </div>
+
+                </div>
 
             </div>
 

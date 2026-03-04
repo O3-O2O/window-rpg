@@ -39,31 +39,61 @@ function changeGame(page, icon) {
 
     }
 }
-document.addEventListener("DOMContentLoaded", () => {
+
+
+window.funcLoading = async () => {
 
     const container = document.getElementById("openingGame");
+
     const icon = localStorage.getItem("openedGameIcon");
     const page = localStorage.getItem("openedGamePage");
+    const openPC = localStorage.getItem("myPCOpen");
+
+    container.innerHTML = "";
+    container.style.display = "none";
 
     if (icon && page) {
 
-        container.style.display = "flex"; // hoặc block
+        container.style.display = "flex";
 
-        container.innerHTML = `
-    <div class="taskbar-app">
-        <div class="taskbar-icon"
-            onclick="window.location.href='${page}'"
-            style="background-image:url('${icon}')">
+        container.innerHTML += `
+        <div class="taskbar-app">
+            <div class="taskbar-icon"
+                onclick="window.location.href='${page}'"
+                style="background-image:url('${icon}')">
+            </div>
+            <span class="close-app" onclick="closeApp()">✖</span>
         </div>
-        <span class="close-app" onclick="closeApp()">✖</span>
-    </div>
-`;
-
-    } else {
-        container.style.display = "none";
+        `;
     }
 
-});
+    if (openPC) {
+
+        container.style.display = "flex";
+
+        container.innerHTML += `
+        <div class="taskbar-app">
+            <div class="taskbar-icon"
+                onclick="windowComputerInner()"
+                style="background-image:url('${openPC}')">
+            </div>
+            <span class="close-app" onclick="deletePC()">✖</span>
+        </div>
+        `;
+    }
+
+    const savedddBg = localStorage.getItem("desktopBackground");
+
+    if (savedddBg) {
+        const desktop = document.querySelector(".window-main");
+        desktop.style.background = savedddBg;
+        desktop.style.backgroundSize = "cover";
+        desktop.style.backgroundPosition = "center";
+    }
+
+}
+
+document.addEventListener("DOMContentLoaded",funcLoading);
 
 function closeApp() {
 
@@ -72,7 +102,114 @@ function closeApp() {
     localStorage.removeItem("openedGamePage");
 
     // Xóa icon khỏi taskbar
-    const container = document.getElementById("openingGame");
-    container.innerHTML = "";
-    container.style.display = "none";
+    funcLoading()
+}
+
+const box = document.getElementById("comZone");
+
+let isDragging = false;
+let offsetX = 0;
+let offsetY = 0;
+
+box.addEventListener("mousedown", (e) => {
+    isDragging = true;
+    offsetX = e.clientX - box.offsetLeft;
+    offsetY = e.clientY - box.offsetTop;
+    box.style.cursor = "grabbing";
+});
+
+document.addEventListener("mousemove", (e) => {
+    if (!isDragging) return;
+
+    box.style.left = (e.clientX - offsetX) + "px";
+    box.style.top = (e.clientY - offsetY) + "px";
+});
+
+document.addEventListener("mouseup", () => {
+    isDragging = false;
+    box.style.cursor = "grab";
+});
+
+
+const myPC = document.getElementById("comZone")
+let counting = 0
+const myPCPic = "../UI/windows-xp-others-pngs-icons-arbeitsplatz-png-icon-thumbnail-removebg-preview__1_-removebg-preview.png"
+
+window.windowComputer = async () => {
+
+    counting++
+
+    if(counting >= 2){
+
+        myPC.classList.remove("minus")
+
+        localStorage.setItem("myPCOpen", myPCPic)
+
+        funcLoading()
+
+    }else{
+
+        setTimeout(() => {
+
+            counting = 0
+
+        },1000)
+
+    }
+
+}
+
+window.windowComputerInner = async () => {
+
+    if(myPC.classList.contains("minus")){
+
+        myPC.classList.remove("minus")
+
+    }else{
+
+        myPC.classList.add("minus")
+
+    }
+
+}
+
+window.closingPC = async () => {
+
+    myPC.classList.add("minus")
+
+}
+
+window.deletePC = () => {
+
+    myPC.classList.add("minus");
+    myPC.style.top = "25vh";
+    myPC.style.left = "25vw";
+
+    localStorage.removeItem("myPCOpen");
+
+    funcLoading()
+}
+
+window.bgChangeGradient = (gradient) => {
+
+    const desktop = document.querySelector(".window-main");
+
+    desktop.style.background = gradient;
+    desktop.style.backgroundSize = "cover";
+    desktop.style.backgroundPosition = "center";
+
+    // 🔥 LƯU
+    localStorage.setItem("desktopBackground", gradient);
+
+}
+
+window.resetBg = async () => {
+
+    const desktop = document.querySelector(".window-main");
+
+    desktop.style.background = "url('../Picture/xp_window_bg.jpg')"
+    desktop.style.backgroundSize = "cover";
+    desktop.style.backgroundPosition = "center";
+
+    localStorage.removeItem("desktopBackground")
 }

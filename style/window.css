@@ -6,6 +6,12 @@
     font-family: Tahoma, Verdana, sans-serif;
 }
 
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden; /* QUAN TRỌNG */
+}
+
 
 /* ===== DESKTOP ===== */
 .window-main{
@@ -15,19 +21,25 @@
     background-size: cover;
     display: grid;
     grid-template-rows: 27fr 2fr;
+    position: fixed;      /* Khóa theo viewport */
+    top: 0;
+    left: 0;
+    overflow: hidden;     /* Không cho con tràn ra */
 }
+ 
 /* ===== ICON AREA ===== */
 .content-choosing{
     display: flex;
-    height: 100%;
-    width: 100%;
     flex-wrap: wrap;
-    padding: 1%;
+    align-content: flex-start;   /* QUAN TRỌNG */
+    gap: 20px;
+    padding: 20px;
 }
 
 .join-game{
-    height: 12%;
-    width: 6%;
+    width: clamp(70px, 8vw, 100px);
+    height: auto;
+    aspect-ratio: 1 / 1.2;
 
     background: transparent;
     border: none;
@@ -60,6 +72,13 @@
     background-size: contain;
 }
 
+.myComputer{
+
+    background: url("../UI/windows-xp-others-pngs-icons-arbeitsplatz-png-icon-thumbnail-removebg-preview__1_-removebg-preview.png") no-repeat center !important; 
+    background-size: cover !important;
+
+}
+
 /* Tên game */
 .nameGame{
     font-size: 13px;
@@ -90,38 +109,41 @@
 .shutdown-btn{
     position: relative;
     height: 100%;
-    width: 8%;
+    min-width: 8%;
 }
 
 .btn-shut{
+    height: 100%;
+    min-width: 100%;
+    padding: 0 12px;
+
     display: flex;
     align-items: center;
+    justify-content: center;
+    gap: 8px;
 
-    height: 100%;
-    width: 100%;
-    padding-left: 10px;
+    font-size: clamp(14px, 1.2vw, 16px);
+    font-weight: bold;
+    color: white;
 
     border: none;
-    cursor: pointer;
-    color: white;
-    font-weight: bold;
-    font-size: 20px;
+    border-radius: 6px;
 
-    border-radius: 0 18px 18px 0;
+    cursor: pointer;
 
     background: linear-gradient(
         to bottom,
-        #4cd964 0%,
-        #2fa329 45%,
-        #1e7a1e 100%
+        #3cb043 0%,
+        #2f9e36 50%,
+        #237a2a 100%
     );
 
     box-shadow:
-        inset 0 2px 3px rgba(255,255,255,0.7),
-        inset 0 -2px 4px rgba(0,0,0,0.4),
-        2px 0 5px rgba(0,0,0,0.3);
+        inset 0 2px 0 rgba(255,255,255,0.4),
+        inset 0 -2px 0 rgba(0,0,0,0.4),
+        0 2px 4px rgba(0,0,0,0.4);
 
-    transition: 0.15s;
+    transition: all 0.15s ease;
 }
 
 .btn-shut div{
@@ -192,45 +214,66 @@
 }
 
 /* =========================
-   RESPONSIVE
+   RESPONSIVE SYSTEM
 ========================= */
 
-/* Tablet */
+
+/* ===== Tablet ===== */
 @media (max-width: 1024px) {
 
-    .join-game{
-        width: 10%;
-        height: 14%;
+    .window-main{
+        grid-template-rows: 22fr 3fr;
     }
 
-    .nameGame{
-        font-size: 12px;
+    .join-game{
+        width: 12%;
+        height: 16%;
+    }
+
+    .join-game>div{
+        width: 60%;
+        height: 60%;
     }
 
     .shutdown-btn{
-        width: 14%;
+        width: 18%;
     }
 
-    .btn-shut{
-        font-size: 18px;
+    .taskbar-app{
+        
+        min-width: 100px;
+        height: 90%;
+
     }
 
-    .func-btn{
-        width: 180px;
+    .myComputerFunction{
+        width: 75vw;
+        height: 65vh;
+        top: 17vh;
+        left: 12.5vw;
     }
 }
 
-
-/* Mobile lớn */
+/* ===== Mobile ngang ===== */
 @media (max-width: 768px) {
 
     .window-main{
-        grid-template-rows: 20fr 3fr;
+        grid-template-rows: 18fr 4fr;
+    }
+
+    .content-choosing{
+        justify-content: center;
+        align-content: flex-start;
     }
 
     .join-game{
-        width: 18%;
-        height: 18%;
+        width: 22%;
+        height: 20%;
+    }
+
+    .join-game>div{
+        width: 70%;
+        height: 70%;
     }
 
     .nameGame{
@@ -238,25 +281,30 @@
     }
 
     .shutdown-btn{
-        width: 25%;
+        width: 30%;
     }
 
     .btn-shut{
-        font-size: 16px;
-        padding-left: 6px;
+        font-size: 15px;
     }
 
-    .func-btn{
-        width: 160px;
+    .taskbar-app{
+        width: 18%;
+    }
+
+    .myComputerFunction{
+        width: 90vw;
+        height: 75vh;
+        top: 10vh;
+        left: 5vw;
     }
 }
 
-
-/* Mobile nhỏ */
+/* ===== Mobile nhỏ ===== */
 @media (max-width: 480px) {
 
-    .content-choosing{
-        justify-content: center;
+    .window-main{
+        grid-template-rows: 16fr 5fr;
     }
 
     .join-game{
@@ -269,17 +317,28 @@
     }
 
     .shutdown-btn{
-        width: 40%;
+        width: 45%;
     }
 
     .btn-shut{
         font-size: 14px;
     }
 
-    .func-btn{
-        width: 140px;
-        font-size: 13px;
+    .taskbar-app{
+        width: 28%;
     }
+
+    .myComputerFunction{
+        width: 95vw;
+        height: 80vh;
+        top: 8vh;
+        left: 2.5vw;
+    }
+
+    .btn-close-exit{
+        width: 18%;
+    }
+
 }
 
 /* ===== OPENING APP AREA ===== */
@@ -367,4 +426,205 @@
 
 .close-app:hover {
     color: red;
+}
+
+.myComputerFunction{
+
+    /* Giữ nguyên size + position của bạn */
+    height: 50vh;
+    width: 50vw;
+    position: absolute;
+    top: 25vh;
+    left: 25vw;
+    display: grid;
+    grid-template-rows: 32px 1fr;
+    padding: 0;
+
+    /* XP Window Look */
+    background: #ece9d8;
+    border: 3px solid #245edb;
+    border-radius: 8px;
+
+    box-shadow:
+        0 10px 25px rgba(0,0,0,0.5),
+        inset 0 1px 0 rgba(255,255,255,0.6);
+}
+
+
+
+/* ===== TITLE BAR ===== */
+.close-exit{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 20px;
+
+    font-weight: bold;
+    font-size: 14px;
+    color: white;
+
+    border-radius: 6px 6px 0 0;
+
+    background: linear-gradient(
+        to bottom,
+        #3a7bf2 0%,
+        #2b6de0 50%,
+        #1e4fb8 100%
+    );
+
+    box-shadow: inset 0 1px 2px rgba(255,255,255,0.6);
+}
+
+/* ===== CONTENT ===== */
+
+
+.btn-close-exit{
+
+    height: 100%;
+    width: 7.5%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 2px;
+
+}
+
+/* ===== TITLE BAR BUTTONS ===== */
+.btn-close-exit button{
+    height: 22px;
+    width: 28px;
+
+    border-radius: 3px;
+    border: 1px solid #1e4fb8;
+
+    font-size: 14px;
+    font-weight: bold;
+    color: white;
+
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: linear-gradient(
+        to bottom,
+        #5fa2ff 0%,
+        #3a7bf2 50%,
+        #245edb 100%
+    );
+
+    box-shadow:
+        inset 0 1px 1px rgba(255,255,255,0.6),
+        inset 0 -1px 2px rgba(0,0,0,0.4);
+    
+    transition: 0.1s;
+}
+
+/* Hover effect */
+.btn-close-exit button:hover{
+    filter: brightness(1.1);
+}
+
+/* Click effect */
+.btn-close-exit button:active{
+    transform: scale(0.95);
+    background: linear-gradient(
+        to bottom,
+        #3a7bf2,
+        #1e4fb8
+    );
+}
+
+/* Close button riêng */
+.btn-close-exit button:last-child{
+    background: linear-gradient(
+        to bottom,
+        #ff5c5c 0%,
+        #e63939 50%,
+        #b30000 100%
+    );
+    border: 1px solid #7a0000;
+}
+
+.btn-close-exit button:last-child:hover{
+    filter: brightness(1.15);
+}
+
+.minus{
+
+    display: none !important;
+}
+
+.insInf{
+    background: white;
+    padding: 10px;
+    overflow: auto;
+    display: flex;
+    justify-content: center;
+}
+
+/* ===== BACKGROUND PANEL ===== */
+
+.bgChanging{
+    width: 100%;
+    height: 40%;
+    border-radius: 6px;
+
+    padding: 15px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.bgFont{
+
+    height: 10%;
+    width: 100%;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+
+}
+
+/* Title */
+.bgFont span{
+    font-size: 16px;
+    font-weight: bold;
+    color: #2b5797;
+}
+
+/* Button container */
+.bgBtn{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    gap: 15px;
+}
+
+/* Background buttons */
+.bgBtn button{
+    height: 70px;
+    border-radius: 6px;
+    border: 2px solid #b6b3a6;
+
+    cursor: pointer;
+
+    background-size: cover;
+    background-position: center;
+
+    transition: 0.2s;
+}
+
+/* Hover effect */
+.bgBtn button:hover{
+    transform: scale(1.05);
+    border-color: #3a7bf2;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+/* Active click */
+.bgBtn button:active{
+    transform: scale(0.98);
 }
