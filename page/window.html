@@ -26,11 +26,19 @@
 
             </button>
 
-            <button onclick="windowComputer()" class="join-game">
+            <button onclick="windowComputer()" class="join-game jpg-1">
 
                 <div class="myComputer"></div>
 
                 <span class="nameGame">My computer</span>
+
+            </button>
+
+            <button onclick="windowBomb()" class="join-game">
+
+                <div class="myBomb"></div>
+
+                <span class="nameGame">Minesweeper</span>
 
             </button>
 
@@ -96,6 +104,10 @@
                         <button onclick="bgChangeGradient('linear-gradient(to right, #11998e, #38ef7d)')" style="background: linear-gradient(to right, #11998e, #38ef7d);"></button>
                         <button onclick="bgChangeGradient('linear-gradient(to right, #8e2de2, #4a00e0)')" style="background: linear-gradient(to right, #8e2de2, #4a00e0);"></button>
                         <button onclick="bgChangeGradient('radial-gradient(circle, #ffecd2, #fcb69f)')" style="background: radial-gradient(circle, #ffecd2, #fcb69f);"></button>
+                        <label class="xp-file-btn">
+                            📂
+                            <input onclick="outFileBg()" type="file" id="bgFileInput" accept="image/*">
+                        </label>
                         <button onclick="resetBg();">⟲</button>
 
                     </div>
@@ -106,11 +118,48 @@
 
         </div>
 
+        <div id="comZonee" class="myComputerFunction minus" draggable="true">
+
+            <div class="close-exit">
+
+                <span>Bomb</span>
+
+                <div class="btn-close-exit">
+
+                    <button onclick="closingBomb()">-</button>
+                    <button onclick="deleteBomb()">✕</button>
+
+                </div>
+
+            </div>
+
+            <div class="insInf">
+
+                <div id="minesweeper">
+
+                    <div id="mineHeader">
+                    💣 Mines: <span id="mineCount"></span>
+                    </div>
+
+                    <div id="mineBoard"></div>
+
+                    <div id="winScreen">YOU WIN</div>
+
+                </div>
+
+            </div>
+
+        </div>
+
     </div>
+
+    <script src="../script/mineSweeper.js"></script>
     
 
     <script src="../script/window.js"></script>
+    
     <script src="../script/window_shut_re.js"></script>
+    
 
     <script>
 

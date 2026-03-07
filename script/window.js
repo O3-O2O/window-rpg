@@ -48,6 +48,7 @@ window.funcLoading = async () => {
     const icon = localStorage.getItem("openedGameIcon");
     const page = localStorage.getItem("openedGamePage");
     const openPC = localStorage.getItem("myPCOpen");
+    const openBomb = localStorage.getItem("myBombOpen");
 
     container.innerHTML = "";
     container.style.display = "none";
@@ -82,6 +83,21 @@ window.funcLoading = async () => {
         `;
     }
 
+    if (openBomb) {
+
+        container.style.display = "flex";
+
+        container.innerHTML += `
+        <div class="taskbar-app">
+            <div class="taskbar-icon"
+                onclick="windowBombInner()"
+                style="background-image:url('${openBomb}')">
+            </div>
+            <span class="close-app" onclick="deleteBomb()">✖</span>
+        </div>
+        `;
+    }
+
     const savedddBg = localStorage.getItem("desktopBackground");
 
     if (savedddBg) {
@@ -90,6 +106,8 @@ window.funcLoading = async () => {
         desktop.style.backgroundSize = "cover";
         desktop.style.backgroundPosition = "center";
     }
+
+    
 
 }
 
@@ -106,28 +124,54 @@ function closeApp() {
 }
 
 const box = document.getElementById("comZone");
+const bomb = document.getElementById("comZonee")
 
 let isDragging = false;
 let offsetX = 0;
 let offsetY = 0;
 
-box.addEventListener("mousedown", (e) => {
-    isDragging = true;
-    offsetX = e.clientX - box.offsetLeft;
-    offsetY = e.clientY - box.offsetTop;
-    box.style.cursor = "grabbing";
-});
+function makeDraggable(element){
 
-document.addEventListener("mousemove", (e) => {
-    if (!isDragging) return;
+    let isDragging = false;
+    let offsetX = 0;
+    let offsetY = 0;
 
-    box.style.left = (e.clientX - offsetX) + "px";
-    box.style.top = (e.clientY - offsetY) + "px";
-});
+    element.addEventListener("mousedown", (e) => {
+        isDragging = true;
+        offsetX = e.clientX - element.offsetLeft;
+        offsetY = e.clientY - element.offsetTop;
+        element.style.cursor = "grabbing";
+    });
 
-document.addEventListener("mouseup", () => {
-    isDragging = false;
-    box.style.cursor = "grab";
+    document.addEventListener("mousemove", (e) => {
+        if (!isDragging) return;
+
+        element.style.left = (e.clientX - offsetX) + "px";
+        element.style.top = (e.clientY - offsetY) + "px";
+    });
+
+    document.addEventListener("mouseup", () => {
+        isDragging = false;
+        element.style.cursor = "grab";
+    });
+
+}
+
+makeDraggable(document.getElementById("comZone"));
+makeDraggable(document.getElementById("comZonee"));
+
+let topZ = 10;
+
+document.querySelectorAll(".myComputerFunction")
+.forEach(win => {
+
+    win.addEventListener("mousedown", () => {
+
+        topZ++;
+        win.style.zIndex = topZ;
+
+    });
+
 });
 
 
@@ -159,6 +203,34 @@ window.windowComputer = async () => {
 
 }
 
+const myBomb = document.getElementById("comZonee")
+let countBomb = 0
+const myBombPic = "../UI/bomb__2_-removebg-preview.png"
+
+window.windowBomb = async () => {
+
+    countBomb++
+
+    if(countBomb >= 2){
+
+        myBomb.classList.remove("minus")
+
+        localStorage.setItem("myBombOpen", myBombPic)
+
+        funcLoading()
+
+    }else{
+
+        setTimeout(() => {
+
+            countBomb = 0
+
+        },1000)
+
+    }
+
+}
+
 window.windowComputerInner = async () => {
 
     if(myPC.classList.contains("minus")){
@@ -168,6 +240,20 @@ window.windowComputerInner = async () => {
     }else{
 
         myPC.classList.add("minus")
+
+    }
+
+}
+
+window.windowBombInner = async () => {
+
+    if(myBomb.classList.contains("minus")){
+
+        myBomb.classList.remove("minus")
+
+    }else{
+
+        myBomb.classList.add("minus")
 
     }
 
@@ -185,7 +271,29 @@ window.deletePC = () => {
     myPC.style.top = "25vh";
     myPC.style.left = "25vw";
 
+
     localStorage.removeItem("myPCOpen");
+
+
+    funcLoading()
+}
+
+window.closingBomb = async () => {
+
+    myBomb.classList.add("minus")
+
+}
+
+window.deleteBomb = () => {
+
+    myBomb.classList.add("minus");
+    myBomb.style.top = "25vh";
+    myBomb.style.left = "25vw";
+
+
+
+    localStorage.removeItem("myBombOpen");
+
 
     funcLoading()
 }
@@ -213,3 +321,36 @@ window.resetBg = async () => {
 
     localStorage.removeItem("desktopBackground")
 }
+
+window.outFileBg = async () => {
+
+    const input = document.getElementById("bgFileInput");
+
+    input.click(); // mở file explorer
+
+    input.onchange = (e) => {
+
+        const file = e.target.files[0];
+
+        if(!file) return;
+
+        const url = URL.createObjectURL(file);
+
+        const desktop = document.querySelector(".window-main");
+
+        desktop.style.background = `url(${url})`;
+        desktop.style.backgroundSize = "cover";
+        desktop.style.backgroundPosition = "center";
+
+        // lưu background
+        localStorage.setItem("desktopBackground", `url(${url})`);
+
+    }
+
+}
+
+const taskbar = document.querySelector(".openingGame")
+
+taskbar.addEventListener("wheel",(e)=>{
+    taskbar.scrollLeft += e.deltaY
+})
