@@ -287,8 +287,33 @@ window.closingBomb = async () => {
 window.deleteBomb = () => {
 
     myBomb.classList.add("minus");
-    myBomb.style.top = "25vh";
-    myBomb.style.left = "25vw";
+    
+
+    let ua = navigator.userAgent;
+
+    if (/Android/i.test(ua)) {
+        console.log("Android");
+        myBomb.style.top = "0vh";
+        myBomb.style.left = "0vw";
+    }
+    else if (/iPhone|iPad|iPod/i.test(ua)) {
+        console.log("iOS");
+        myBomb.style.top = "0vh";
+        myBomb.style.left = "0vw";
+    }
+    else if (/Windows/i.test(ua)) {
+        console.log("Windows PC");
+        myBomb.style.top = "25vh";
+        myBomb.style.left = "25vw";
+    }
+    else if (/Mac/i.test(ua)) {
+        console.log("Mac");
+        myBomb.style.top = "25vh";
+        myBomb.style.left = "25vw";
+    }
+    else {
+        console.log("Không xác định");
+    }
 
 
 

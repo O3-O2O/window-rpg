@@ -354,6 +354,15 @@ html, body {
         min-width:110px;
     }
 
+    .bombResponsive{
+
+        left: 0px !important;
+        top: 0px !important;
+        width: 100% !important;
+        height: 80% !important;
+
+    }
+
 }
 
 @media (max-width:480px){
