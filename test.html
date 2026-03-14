@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <style>
+        *{
+
+            margin: 0px;
+            padding: 0px;
+
+        }
+
+        .container{
+
+            height: 100vh;
+            width: 100vw;
+            position: relative;
+
+        }
+
+        .container>span:nth-child(1){
+
+            position: absolute;
+
+            top: 20px;
+            left: 20px;
+            font-size: 40px;
+
+        }
+
+        .container>span:nth-child(2){
+
+            position: absolute;
+
+            top: 20px;
+            left: 300px;
+            font-size: 40px;
+
+        }
+
+        #box{
+
+            height: 32px;
+            width: 32px;
+            left: 200px;
+            top: 200px;
+            background-color: black;
+            position: absolute;
+            z-index: 999;
+
+        }
+
+        .item{
+
+            height: 32px;
+            width: 32px;
+            background-color: red;
+            position: absolute;
+
+        }
+
+        .unactive{
+
+            display: none;
+
+        }
+
+
+
+    </style>
+
+    <div class="container">
+
+        <span>Score: <span id="score">0</span></span>
+
+        <span>Time Remain: <span id="time">30s</span></span>
+
+        <div id="box"></div>
+
+        <div class="item"></div>
+
+    </div>
+
+    <script>
+
+        
+
+        let player = document.getElementById("box");
+
+        let item = document.querySelector(".item");
+
+        let score = document.getElementById("score")
+
+        let time = document.getElementById("time")
+
+        let gameOver = false
+
+        window.randomPlace = async () => {
+
+            item.style.top = `${Math.random()*1000}px`
+            item.style.left = `${Math.random()*2000}px`
+
+        }
+
+        function checkCollision() {
+
+            let playerRect = player.getBoundingClientRect();
+            let itemRect = item.getBoundingClientRect();
+
+            if(
+            playerRect.left < itemRect.right &&
+            playerRect.right > itemRect.left &&
+                playerRect.top < itemRect.bottom &&
+                playerRect.bottom > itemRect.top
+            ){
+                randomPlace()
+                increaseScore()
+            }
+        }
+
+        let a = 0
+        window.increaseScore = async () => {
+
+            a++
+
+            score.textContent = a
+
+        }
+
+        let timeOut = 30
+
+        window.decreaseTime = setInterval(() => {
+
+            timeOut --
+            time.textContent = `${timeOut}s`
+
+            if(timeOut == 0) {
+
+                gameOver = true
+
+                overGame(gameOver)
+
+                clearInterval(decreaseTime)
+
+            }
+
+        },1000)
+
+        async function overGame(e) {
+
+            if(e == true){
+
+                document.querySelector(".container").classList.add("unactive")
+
+            }
+            
+        }
+
+        let x = 0;
+        let y = 0;
+
+        let keys = {};
+
+        document.addEventListener("keydown", (e)=>{
+            keys[e.key.toLowerCase()] = true;
+        });
+
+        document.addEventListener("keyup", (e)=>{
+            keys[e.key.toLowerCase()] = false;
+        });
+
+        function update(){
+
+            if(keys["w"]){
+                y -= 5;
+                if(keys["q"]){
+
+                    y-= 10
+
+                }
+            }
+
+            if(keys["s"]){
+                y += 5;
+
+                if(keys["q"]){
+
+                    y+= 10
+
+                }
+            }
+
+            if(keys["a"]){
+                x -= 5;
+
+                if(keys["q"]){
+
+                    x-= 10
+
+                }
+            }
+
+            if(keys["d"]){
+                x += 5;
+
+                if(keys["q"]){
+
+                    x+= 10
+
+                }
+            }
+
+            if(y < 0) y = 0;
+            if(x < 0) x = 0;
+
+            if(y > window.innerHeight - 32) y = window.innerHeight - 32;
+            if(x > window.innerWidth - 32) x = window.innerWidth - 32;
+
+            
+
+            player.style.top = y + "px";
+            player.style.left = x + "px";
+
+            checkCollision()
+
+            requestAnimationFrame(update);
+        }
+
+        update();
+        randomPlace()
+        </script>
+
+</body>
+</html>
